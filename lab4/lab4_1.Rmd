@@ -142,42 +142,50 @@ mammals <- readr::read_csv("data/mammal_lifehistories_v2.csv")
 
 1. Use one or more of your favorite functions to assess the structure of the data.  
 ```{r}
-
+mammals %>% glimpse()
 ```
 
 2. Are there any NAs? Are you sure? Try taking an average of `max. life` as a test.  
-```{r}
 
+The mammals data set does not contain NAs.
+```{r}
+mammals %>% is.na() %>% sum()
+mammals$`max. life` %>% mean()
 ```
 
 3. What are the names of the columns in the `mammals` data?
 ```{r}
-
+mammals %>% names()
 ```
 
 4. Rename any columns that have capitol letters or punctuation issues.  
 ```{r}
+mammals <- mammals %>% rename(genus = Genus, afr = AFR, `max life` = `max. life`)
+```
 
+```{r}
+mammals %>% names()
 ```
 
 5. We are only interested in the variables `genus`, `species`, and `mass`. Use `select()` to build a new dataframe `mass` focused on these variables.
 ```{r}
-
+mass <- mammals %>% select(genus, species, mass)
+mass %>% head()
 ```
 
 6. What if we only wanted to exclude `order` and `family`? Use the `-` operator to make the code efficient.
 ```{r}
-
+mammals %>% select(-order, -family) %>% head()
 ```
 
 7. Select the columns that include "mass" as part of the name.  
 ```{r}
-
+mammals %>% select(contains('mass'))
 ```
 
 8. Select all of the columns that are of class `character`.  
 ```{r}
-
+mammals %>% select_if(is.character)
 ```
 
 ## Other
@@ -185,12 +193,13 @@ Here are two examples of code that are super helpful to have in your bag of tric
 
 Imported data frames often have a mix of lower and uppercase column names. Use `toupper()` or `tolower()` to fix this issue. I always try to use lowercase to keep things consistent.  
 ```{r}
-#mammals <- select_all(mammals, tolower)
+mammals <- select_all(mammals, tolower)
+mammals %>% names()
 ```
 
 When naming columns, blank spaces are often added (don't do this, please). Here is a trick to remove these.  
 ```{r}
-#select_all(mammals, ~str_replace(., " ", "_"))
+select_all(mammals, ~str_replace(., " ", "_"))
 ```
 
 ## That's it! Take a break and I will see you on Zoom!  
