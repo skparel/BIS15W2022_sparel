@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-01-08" />
+<meta name="date" content="2022-01-10" />
 
 <title>Importing Data Frames</title>
 
@@ -265,7 +265,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Importing Data Frames</h1>
-<h4 class="date">2022-01-08</h4>
+<h4 class="date">2022-01-10</h4>
 
 </div>
 
@@ -343,75 +343,36 @@ class(hot_springs$scientist)</code></pre>
 <li>In your lab 3 folder there is another folder titled <code>data</code>. Inside the <code>data</code> folder there is a <code>.csv</code> titled <code>Gaeta_etal_CLC_data.csv</code>. Open this data and store them as an object called <code>fish</code>.</li>
 </ol>
 <p>The data are from: Gaeta J., G. Sass, S. Carpenter. 2012. Biocomplexity at North Temperate Lakes LTER: Coordinated Field Studies: Large Mouth Bass Growth 2006. Environmental Data Initiative. <a href="https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ntl&amp;identifier=267">link</a></p>
-<pre class="r"><code>fish &lt;- read_csv(&quot;C:\\Users\\Owner\\Documents\\GitHub\\BIS15W2022_sparel\\lab3\\data\\Tamburelloetal_HomeRangeDatabase.csv&quot;)</code></pre>
+<pre class="r"><code>fish &lt;- read_csv(&quot;C:\\Users\\Owner\\Documents\\GitHub\\BIS15W2022_sparel\\lab3\\data\\Gaeta_etal_CLC_data.csv&quot;)</code></pre>
 <pre><code>## 
 ## -- Column specification --------------------------------------------------------
 ## cols(
-##   .default = col_character(),
-##   mean.mass.g = col_double(),
-##   log10.mass = col_double(),
-##   mean.hra.m2 = col_double(),
-##   log10.hra = col_double(),
-##   preymass = col_double(),
-##   log10.preymass = col_double(),
-##   PPMR = col_double()
-## )
-## i Use `spec()` for the full column specifications.</code></pre>
+##   lakeid = col_character(),
+##   fish_id = col_double(),
+##   annnumber = col_character(),
+##   length = col_double(),
+##   radii_length_mm = col_double(),
+##   scalelength = col_double()
+## )</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>What is the structure of these data?</li>
 </ol>
 <pre class="r"><code>fish %&gt;% str()</code></pre>
-<pre><code>## tibble [569 x 24] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ taxon                     : chr [1:569] &quot;lake fishes&quot; &quot;river fishes&quot; &quot;river fishes&quot; &quot;river fishes&quot; ...
-##  $ common.name               : chr [1:569] &quot;american eel&quot; &quot;blacktail redhorse&quot; &quot;central stoneroller&quot; &quot;rosyside dace&quot; ...
-##  $ class                     : chr [1:569] &quot;actinopterygii&quot; &quot;actinopterygii&quot; &quot;actinopterygii&quot; &quot;actinopterygii&quot; ...
-##  $ order                     : chr [1:569] &quot;anguilliformes&quot; &quot;cypriniformes&quot; &quot;cypriniformes&quot; &quot;cypriniformes&quot; ...
-##  $ family                    : chr [1:569] &quot;anguillidae&quot; &quot;catostomidae&quot; &quot;cyprinidae&quot; &quot;cyprinidae&quot; ...
-##  $ genus                     : chr [1:569] &quot;anguilla&quot; &quot;moxostoma&quot; &quot;campostoma&quot; &quot;clinostomus&quot; ...
-##  $ species                   : chr [1:569] &quot;rostrata&quot; &quot;poecilura&quot; &quot;anomalum&quot; &quot;funduloides&quot; ...
-##  $ primarymethod             : chr [1:569] &quot;telemetry&quot; &quot;mark-recapture&quot; &quot;mark-recapture&quot; &quot;mark-recapture&quot; ...
-##  $ N                         : chr [1:569] &quot;16&quot; NA &quot;20&quot; &quot;26&quot; ...
-##  $ mean.mass.g               : num [1:569] 887 562 34 4 4 ...
-##  $ log10.mass                : num [1:569] 2.948 2.75 1.531 0.602 0.602 ...
-##  $ alternative.mass.reference: chr [1:569] NA NA NA NA ...
-##  $ mean.hra.m2               : num [1:569] 282750 282.1 116.1 125.5 87.1 ...
-##  $ log10.hra                 : num [1:569] 5.45 2.45 2.06 2.1 1.94 ...
-##  $ hra.reference             : chr [1:569] &quot;Minns, C. K. 1995. Allometry of home range size in lake and river fishes. Canadian Journal of Fisheries and Aqu&quot;| __truncated__ &quot;Minns, C. K. 1995. Allometry of home range size in lake and river fishes. Canadian Journal of Fisheries and Aqu&quot;| __truncated__ &quot;Minns, C. K. 1995. Allometry of home range size in lake and river fishes. Canadian Journal of Fisheries and Aqu&quot;| __truncated__ &quot;Minns, C. K. 1995. Allometry of home range size in lake and river fishes. Canadian Journal of Fisheries and Aqu&quot;| __truncated__ ...
-##  $ realm                     : chr [1:569] &quot;aquatic&quot; &quot;aquatic&quot; &quot;aquatic&quot; &quot;aquatic&quot; ...
-##  $ thermoregulation          : chr [1:569] &quot;ectotherm&quot; &quot;ectotherm&quot; &quot;ectotherm&quot; &quot;ectotherm&quot; ...
-##  $ locomotion                : chr [1:569] &quot;swimming&quot; &quot;swimming&quot; &quot;swimming&quot; &quot;swimming&quot; ...
-##  $ trophic.guild             : chr [1:569] &quot;carnivore&quot; &quot;carnivore&quot; &quot;carnivore&quot; &quot;carnivore&quot; ...
-##  $ dimension                 : chr [1:569] &quot;3D&quot; &quot;2D&quot; &quot;2D&quot; &quot;2D&quot; ...
-##  $ preymass                  : num [1:569] NA NA NA NA NA NA 1.39 NA NA NA ...
-##  $ log10.preymass            : num [1:569] NA NA NA NA NA ...
-##  $ PPMR                      : num [1:569] NA NA NA NA NA NA 530 NA NA NA ...
-##  $ prey.size.reference       : chr [1:569] NA NA NA NA ...
+<pre><code>## tibble [4,033 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ lakeid         : chr [1:4033] &quot;AL&quot; &quot;AL&quot; &quot;AL&quot; &quot;AL&quot; ...
+##  $ fish_id        : num [1:4033] 299 299 299 300 300 300 300 301 301 301 ...
+##  $ annnumber      : chr [1:4033] &quot;EDGE&quot; &quot;2&quot; &quot;1&quot; &quot;EDGE&quot; ...
+##  $ length         : num [1:4033] 167 167 167 175 175 175 175 194 194 194 ...
+##  $ radii_length_mm: num [1:4033] 2.7 2.04 1.31 3.02 2.67 ...
+##  $ scalelength    : num [1:4033] 2.7 2.7 2.7 3.02 3.02 ...
 ##  - attr(*, &quot;spec&quot;)=
 ##   .. cols(
-##   ..   taxon = col_character(),
-##   ..   common.name = col_character(),
-##   ..   class = col_character(),
-##   ..   order = col_character(),
-##   ..   family = col_character(),
-##   ..   genus = col_character(),
-##   ..   species = col_character(),
-##   ..   primarymethod = col_character(),
-##   ..   N = col_character(),
-##   ..   mean.mass.g = col_double(),
-##   ..   log10.mass = col_double(),
-##   ..   alternative.mass.reference = col_character(),
-##   ..   mean.hra.m2 = col_double(),
-##   ..   log10.hra = col_double(),
-##   ..   hra.reference = col_character(),
-##   ..   realm = col_character(),
-##   ..   thermoregulation = col_character(),
-##   ..   locomotion = col_character(),
-##   ..   trophic.guild = col_character(),
-##   ..   dimension = col_character(),
-##   ..   preymass = col_double(),
-##   ..   log10.preymass = col_double(),
-##   ..   PPMR = col_double(),
-##   ..   prey.size.reference = col_character()
+##   ..   lakeid = col_character(),
+##   ..   fish_id = col_double(),
+##   ..   annnumber = col_character(),
+##   ..   length = col_double(),
+##   ..   radii_length_mm = col_double(),
+##   ..   scalelength = col_double()
 ##   .. )</code></pre>
 <p>Notice that when the data are imported, you are presented with a message that tells you how R interpreted the column classes. This is also where error messages will appear if there are problems.</p>
 </div>
@@ -420,168 +381,94 @@ class(hot_springs$scientist)</code></pre>
 <p>Once data have been uploaded, you may want to get an idea of its structure, contents, and dimensions. I routinely run one or more of these commands when data are first imported.</p>
 <p>We can summarize our data frame with the<code>summary()</code> function.</p>
 <pre class="r"><code>summary(fish)</code></pre>
-<pre><code>##     taxon           common.name           class              order          
-##  Length:569         Length:569         Length:569         Length:569        
-##  Class :character   Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-##                                                                             
-##                                                                             
-##                                                                             
-##                                                                             
-##     family             genus             species          primarymethod     
-##  Length:569         Length:569         Length:569         Length:569        
-##  Class :character   Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-##                                                                             
-##                                                                             
-##                                                                             
-##                                                                             
-##       N              mean.mass.g        log10.mass     
-##  Length:569         Min.   :      0   Min.   :-0.6576  
-##  Class :character   1st Qu.:     50   1st Qu.: 1.6990  
-##  Mode  :character   Median :    330   Median : 2.5185  
-##                     Mean   :  34602   Mean   : 2.5947  
-##                     3rd Qu.:   2150   3rd Qu.: 3.3324  
-##                     Max.   :4000000   Max.   : 6.6021  
-##                                                        
-##  alternative.mass.reference  mean.hra.m2          log10.hra     
-##  Length:569                 Min.   :0.000e+00   Min.   :-1.523  
-##  Class :character           1st Qu.:4.500e+03   1st Qu.: 3.653  
-##  Mode  :character           Median :3.934e+04   Median : 4.595  
-##                             Mean   :2.146e+07   Mean   : 4.709  
-##                             3rd Qu.:1.038e+06   3rd Qu.: 6.016  
-##                             Max.   :3.551e+09   Max.   : 9.550  
-##                                                                 
-##  hra.reference         realm           thermoregulation    locomotion       
-##  Length:569         Length:569         Length:569         Length:569        
-##  Class :character   Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-##                                                                             
-##                                                                             
-##                                                                             
-##                                                                             
-##  trophic.guild       dimension            preymass         log10.preymass   
-##  Length:569         Length:569         Min.   :     0.67   Min.   :-0.1739  
-##  Class :character   Class :character   1st Qu.:    20.02   1st Qu.: 1.3014  
-##  Mode  :character   Mode  :character   Median :    53.75   Median : 1.7304  
-##                                        Mean   :  3989.88   Mean   : 2.0188  
-##                                        3rd Qu.:   363.35   3rd Qu.: 2.5603  
-##                                        Max.   :130233.20   Max.   : 5.1147  
-##                                        NA&#39;s   :502         NA&#39;s   :502      
-##       PPMR         prey.size.reference
-##  Min.   :  0.380   Length:569         
-##  1st Qu.:  3.315   Class :character   
-##  Median :  7.190   Mode  :character   
-##  Mean   : 31.752                      
-##  3rd Qu.: 15.966                      
-##  Max.   :530.000                      
-##  NA&#39;s   :502</code></pre>
+<pre><code>##     lakeid             fish_id       annnumber             length     
+##  Length:4033        Min.   :  1.0   Length:4033        Min.   : 58.0  
+##  Class :character   1st Qu.:156.0   Class :character   1st Qu.:253.0  
+##  Mode  :character   Median :267.0   Mode  :character   Median :299.0  
+##                     Mean   :258.3                      Mean   :293.3  
+##                     3rd Qu.:376.0                      3rd Qu.:342.0  
+##                     Max.   :478.0                      Max.   :420.0  
+##  radii_length_mm    scalelength     
+##  Min.   : 0.4569   Min.   : 0.6282  
+##  1st Qu.: 2.3252   1st Qu.: 4.2596  
+##  Median : 3.5380   Median : 5.4062  
+##  Mean   : 3.6589   Mean   : 5.3821  
+##  3rd Qu.: 4.8229   3rd Qu.: 6.4145  
+##  Max.   :11.0258   Max.   :11.0258</code></pre>
 <p><code>glimpse()</code> is another useful summary function.</p>
 <pre class="r"><code>glimpse(fish)</code></pre>
-<pre><code>## Rows: 569
-## Columns: 24
-## $ taxon                      &lt;chr&gt; &quot;lake fishes&quot;, &quot;river fishes&quot;, &quot;river fi...
-## $ common.name                &lt;chr&gt; &quot;american eel&quot;, &quot;blacktail redhorse&quot;, &quot;c...
-## $ class                      &lt;chr&gt; &quot;actinopterygii&quot;, &quot;actinopterygii&quot;, &quot;act...
-## $ order                      &lt;chr&gt; &quot;anguilliformes&quot;, &quot;cypriniformes&quot;, &quot;cypr...
-## $ family                     &lt;chr&gt; &quot;anguillidae&quot;, &quot;catostomidae&quot;, &quot;cyprinid...
-## $ genus                      &lt;chr&gt; &quot;anguilla&quot;, &quot;moxostoma&quot;, &quot;campostoma&quot;, &quot;...
-## $ species                    &lt;chr&gt; &quot;rostrata&quot;, &quot;poecilura&quot;, &quot;anomalum&quot;, &quot;fu...
-## $ primarymethod              &lt;chr&gt; &quot;telemetry&quot;, &quot;mark-recapture&quot;, &quot;mark-rec...
-## $ N                          &lt;chr&gt; &quot;16&quot;, NA, &quot;20&quot;, &quot;26&quot;, &quot;17&quot;, &quot;5&quot;, &quot;2&quot;, &quot;2...
-## $ mean.mass.g                &lt;dbl&gt; 887.00, 562.00, 34.00, 4.00, 4.00, 3525....
-## $ log10.mass                 &lt;dbl&gt; 2.9479236, 2.7497363, 1.5314789, 0.60206...
-## $ alternative.mass.reference &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
-## $ mean.hra.m2                &lt;dbl&gt; 282750.00, 282.10, 116.11, 125.50, 87.10...
-## $ log10.hra                  &lt;dbl&gt; 5.4514026, 2.4504031, 2.0648696, 2.09864...
-## $ hra.reference              &lt;chr&gt; &quot;Minns, C. K. 1995. Allometry of home ra...
-## $ realm                      &lt;chr&gt; &quot;aquatic&quot;, &quot;aquatic&quot;, &quot;aquatic&quot;, &quot;aquati...
-## $ thermoregulation           &lt;chr&gt; &quot;ectotherm&quot;, &quot;ectotherm&quot;, &quot;ectotherm&quot;, &quot;...
-## $ locomotion                 &lt;chr&gt; &quot;swimming&quot;, &quot;swimming&quot;, &quot;swimming&quot;, &quot;swi...
-## $ trophic.guild              &lt;chr&gt; &quot;carnivore&quot;, &quot;carnivore&quot;, &quot;carnivore&quot;, &quot;...
-## $ dimension                  &lt;chr&gt; &quot;3D&quot;, &quot;2D&quot;, &quot;2D&quot;, &quot;2D&quot;, &quot;2D&quot;, &quot;2D&quot;, &quot;2D&quot;...
-## $ preymass                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 1.39, NA, NA, NA...
-## $ log10.preymass             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 0.1430148, NA, N...
-## $ PPMR                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 530, NA, NA, NA,...
-## $ prey.size.reference        &lt;chr&gt; NA, NA, NA, NA, NA, NA, &quot;Brose U, et al....</code></pre>
+<pre><code>## Rows: 4,033
+## Columns: 6
+## $ lakeid          &lt;chr&gt; &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL...
+## $ fish_id         &lt;dbl&gt; 299, 299, 299, 300, 300, 300, 300, 301, 301, 301, 3...
+## $ annnumber       &lt;chr&gt; &quot;EDGE&quot;, &quot;2&quot;, &quot;1&quot;, &quot;EDGE&quot;, &quot;3&quot;, &quot;2&quot;, &quot;1&quot;, &quot;EDGE&quot;, &quot;3...
+## $ length          &lt;dbl&gt; 167, 167, 167, 175, 175, 175, 175, 194, 194, 194, 1...
+## $ radii_length_mm &lt;dbl&gt; 2.697443, 2.037518, 1.311795, 3.015477, 2.670733, 2...
+## $ scalelength     &lt;dbl&gt; 2.697443, 2.697443, 2.697443, 3.015477, 3.015477, 3...</code></pre>
 <p><code>nrow()</code> gives the numbers of rows.</p>
 <pre class="r"><code>nrow(fish) #the number of rows or observations</code></pre>
-<pre><code>## [1] 569</code></pre>
+<pre><code>## [1] 4033</code></pre>
 <p><code>ncol</code> gives the number of columns.</p>
 <pre class="r"><code>ncol(fish) #the number of columns or variables</code></pre>
-<pre><code>## [1] 24</code></pre>
+<pre><code>## [1] 6</code></pre>
 <p><code>dim()</code> gives the dimensions.</p>
 <pre class="r"><code>dim(fish) #total dimensions</code></pre>
-<pre><code>## [1] 569  24</code></pre>
+<pre><code>## [1] 4033    6</code></pre>
 <p><code>names</code> gives the column names.</p>
 <pre class="r"><code>names(fish) #column names</code></pre>
-<pre><code>##  [1] &quot;taxon&quot;                      &quot;common.name&quot;               
-##  [3] &quot;class&quot;                      &quot;order&quot;                     
-##  [5] &quot;family&quot;                     &quot;genus&quot;                     
-##  [7] &quot;species&quot;                    &quot;primarymethod&quot;             
-##  [9] &quot;N&quot;                          &quot;mean.mass.g&quot;               
-## [11] &quot;log10.mass&quot;                 &quot;alternative.mass.reference&quot;
-## [13] &quot;mean.hra.m2&quot;                &quot;log10.hra&quot;                 
-## [15] &quot;hra.reference&quot;              &quot;realm&quot;                     
-## [17] &quot;thermoregulation&quot;           &quot;locomotion&quot;                
-## [19] &quot;trophic.guild&quot;              &quot;dimension&quot;                 
-## [21] &quot;preymass&quot;                   &quot;log10.preymass&quot;            
-## [23] &quot;PPMR&quot;                       &quot;prey.size.reference&quot;</code></pre>
+<pre><code>## [1] &quot;lakeid&quot;          &quot;fish_id&quot;         &quot;annnumber&quot;       &quot;length&quot;         
+## [5] &quot;radii_length_mm&quot; &quot;scalelength&quot;</code></pre>
 <p><code>head()</code> prints the first n rows of the data frame.</p>
 <pre class="r"><code>head(fish, n = 10)</code></pre>
-<pre><code>## # A tibble: 10 x 24
-##    taxon common.name class order family genus species primarymethod N    
-##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;
-##  1 lake~ american e~ acti~ angu~ angui~ angu~ rostra~ telemetry     16   
-##  2 rive~ blacktail ~ acti~ cypr~ catos~ moxo~ poecil~ mark-recaptu~ &lt;NA&gt; 
-##  3 rive~ central st~ acti~ cypr~ cypri~ camp~ anomal~ mark-recaptu~ 20   
-##  4 rive~ rosyside d~ acti~ cypr~ cypri~ clin~ fundul~ mark-recaptu~ 26   
-##  5 rive~ longnose d~ acti~ cypr~ cypri~ rhin~ catara~ mark-recaptu~ 17   
-##  6 rive~ muskellunge acti~ esoc~ esoci~ esox  masqui~ telemetry     5    
-##  7 mari~ pollack     acti~ gadi~ gadid~ poll~ pollac~ telemetry     2    
-##  8 mari~ saithe      acti~ gadi~ gadid~ poll~ virens  telemetry     2    
-##  9 mari~ lined surg~ acti~ perc~ acant~ acan~ lineat~ direct obser~ &lt;NA&gt; 
-## 10 mari~ orangespin~ acti~ perc~ acant~ naso  litura~ telemetry     8    
-## # ... with 15 more variables: mean.mass.g &lt;dbl&gt;, log10.mass &lt;dbl&gt;,
-## #   alternative.mass.reference &lt;chr&gt;, mean.hra.m2 &lt;dbl&gt;, log10.hra &lt;dbl&gt;,
-## #   hra.reference &lt;chr&gt;, realm &lt;chr&gt;, thermoregulation &lt;chr&gt;, locomotion &lt;chr&gt;,
-## #   trophic.guild &lt;chr&gt;, dimension &lt;chr&gt;, preymass &lt;dbl&gt;, log10.preymass &lt;dbl&gt;,
-## #   PPMR &lt;dbl&gt;, prey.size.reference &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 10 x 6
+##    lakeid fish_id annnumber length radii_length_mm scalelength
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl&gt;
+##  1 AL         299 EDGE         167            2.70        2.70
+##  2 AL         299 2            167            2.04        2.70
+##  3 AL         299 1            167            1.31        2.70
+##  4 AL         300 EDGE         175            3.02        3.02
+##  5 AL         300 3            175            2.67        3.02
+##  6 AL         300 2            175            2.14        3.02
+##  7 AL         300 1            175            1.23        3.02
+##  8 AL         301 EDGE         194            3.34        3.34
+##  9 AL         301 3            194            2.97        3.34
+## 10 AL         301 2            194            2.29        3.34</code></pre>
 <p><code>tail()</code> prinst the last n rows of the data frame.</p>
 <pre class="r"><code>tail(fish, n = 10)</code></pre>
-<pre><code>## # A tibble: 10 x 24
-##    taxon common.name class order family genus species primarymethod N    
-##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;
-##  1 tort~ travancore~ rept~ test~ testu~ indo~ travan~ telemetry     4    
-##  2 tort~ Speke&#39;s hi~ rept~ test~ testu~ kini~ spekii  thread-trail~ 7    
-##  3 tort~ impressed ~ rept~ test~ testu~ mano~ impres~ telemetry     10   
-##  4 tort~ bushmanlan~ rept~ test~ testu~ psam~ tentor~ telemetry     4    
-##  5 tort~ leopard to~ rept~ test~ testu~ stig~ pardal~ telemetry     14   
-##  6 tort~ spur-thigh~ rept~ test~ testu~ test~ graeca  telemetry     10   
-##  7 tort~ mediterran~ rept~ test~ testu~ test~ herman~ telemetry     24   
-##  8 tort~ Russian st~ rept~ test~ testu~ test~ horsfi~ telemetry     29   
-##  9 tort~ Egyptian t~ rept~ test~ testu~ test~ kleinm~ telemetry     9    
-## 10 turt~ Eastern sp~ rept~ test~ trion~ apal~ spinif~ telemetry     11   
-## # ... with 15 more variables: mean.mass.g &lt;dbl&gt;, log10.mass &lt;dbl&gt;,
-## #   alternative.mass.reference &lt;chr&gt;, mean.hra.m2 &lt;dbl&gt;, log10.hra &lt;dbl&gt;,
-## #   hra.reference &lt;chr&gt;, realm &lt;chr&gt;, thermoregulation &lt;chr&gt;, locomotion &lt;chr&gt;,
-## #   trophic.guild &lt;chr&gt;, dimension &lt;chr&gt;, preymass &lt;dbl&gt;, log10.preymass &lt;dbl&gt;,
-## #   PPMR &lt;dbl&gt;, prey.size.reference &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 10 x 6
+##    lakeid fish_id annnumber length radii_length_mm scalelength
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl&gt;
+##  1 WS         180 10           403            8.15        11.0
+##  2 WS         180 9            403            7.49        11.0
+##  3 WS         180 8            403            6.97        11.0
+##  4 WS         180 7            403            6.24        11.0
+##  5 WS         180 6            403            5.41        11.0
+##  6 WS         180 5            403            4.98        11.0
+##  7 WS         180 4            403            4.22        11.0
+##  8 WS         180 3            403            3.04        11.0
+##  9 WS         180 2            403            2.03        11.0
+## 10 WS         180 1            403            1.19        11.0</code></pre>
 <p><code>table()</code> is useful when you have a limited number of categorical variables. It produces fast counts of the number of observations in a variable. We will come back to this later…</p>
-<pre class="r"><code>table(fish$taxon)</code></pre>
+<pre class="r"><code>table(fish$lakeid)</code></pre>
 <pre><code>## 
-##         birds   lake fishes       lizards       mammals marine fishes 
-##           140             9            11           238            90 
-##  river fishes        snakes     tortoises       turtles 
-##            14            41            12            14</code></pre>
+##  AL  AR  BO  BR  CR  DY  FD  JN  LC  LJ  LR LSG  MN  RD  UB  WS 
+## 383 262 197 291 343 355 302 238 173 181 292 143 293 135 191 254</code></pre>
 <p>We can also click on the <code>fish</code> data frame in the Environment tab or type View(fish).</p>
 <pre class="r"><code>View(fish)</code></pre>
 </div>
 <div id="subset" class="section level2">
 <h2>Subset</h2>
 <p>Subset is a way of pulling out observations that meet specific criteria in a variable.</p>
-<pre class="r"><code>#little_fish &lt;- subset(fish, length&lt;=100)
-#little_fish</code></pre>
+<pre class="r"><code>little_fish &lt;- subset(fish, length&lt;=100)
+little_fish</code></pre>
+<pre><code>## # A tibble: 5 x 6
+##   lakeid fish_id annnumber length radii_length_mm scalelength
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl&gt;
+## 1 LSG         58 EDGE          92           1.15        1.15 
+## 2 LSG         59 EDGE          64           0.773       0.773
+## 3 WS         151 EDGE          58           0.628       0.628
+## 4 WS         152 EDGE          74           0.832       0.832
+## 5 WS         153 EDGE          78           0.637       0.637</code></pre>
 </div>
 <div id="practice-1" class="section level2">
 <h2>Practice</h2>
