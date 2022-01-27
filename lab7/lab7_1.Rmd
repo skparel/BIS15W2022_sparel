@@ -118,27 +118,39 @@ doi: 10.1890/15-0846.1 (URL: https://doi.org/10.1890/15-0846.1).
 
 1. Load the `amniota` data below and determine whether or not NA's are present. If they are present, how are they represented?
 ```{r}
-amniota <- readr::read_csv("data/amniota.csv")
+amniota <- readr::read_csv("../lab7/data/amniota.csv")
 ```
 
 ```{r}
+amniota %>% any_na()
+```
 
+NA's are recorded as `-999`.
+```{r}
+amniota %>% head()
 ```
 
 2. Use one of the tools explained above to summarize NA's in the data.
 ```{r}
-
+amniota %>%
+  purrr::map_df(~ sum(is.na(.)))
 ```
 
+
+```{r}
+# number of NA's
+sum(amniota == -999)
+```
 
 3. What's going on here? Try using the `hist` function on one or more of the continuous variables.
 
 ```{r}
-
+amniota$egg_length_mm %>% hist()
 ```
 
 4. Given that we know that the output of #2 is wrong, what do you think is the best approach for dealing with NA's in the `amniote` data?  
 
+The best approach for dealing with NA's in this data set is to replace values of `-999` with `NA`.
 
 ## Replacing values with NA
 If you are certain that NA's are represented by a specific value in the data, the best way to deal with them is to replace the value with NA. This is similar to a find & replace function in excel. Although you can do this when you import the data, in most cases you will need to (and should!) do some exploration first.  
@@ -193,35 +205,43 @@ For the following examples, we will use the `life_history` data for mammals. The
 **S. K. Morgan Ernest. 2003. Life history characteristics of placental non-volant mammals. Ecology 84:3402.**  
 
 1. Load the mammals life history data v2. Do you see any NA's?  
-```{r}
-
+```{r, message = FALSE}
+life_history <- read_csv("data/mammal_lifehistories_v2.csv")
+life_history %>% head()
 ```
 
 
 2. Explore the data using any method that you prefer. `skimr` provides a nice output with histograms for numeric variables.  
 ```{r}
-
+life_history %>% skim()
 ```
 
 
 3. Replace the entries that represent NA's in the data using `na_if()`. Double check your work.
 ```{r}
-
+life_history <- life_history %>% 
+  na_if("-999")
 ```
 
 ```{r}
-
+life_history %>% 
+  map_df(~ sum(is.na(.))) %>% 
+  pivot_longer(everything(),
+    names_to= "variables",
+    values_to = "num_nas") %>% 
+  arrange(desc(num_nas))
+  
 ```
 
 ```{r}
-
+life_history %>% 
+  is.na() %>% 
+  sum()
 ```
 
 
 4. In which variable are the most NAs in the data frame?
-```{r}
-
-```
+The most NAs are in `wean mass`.
 
 
 ## That's it! Take a break and I will see you on Zoom!  
