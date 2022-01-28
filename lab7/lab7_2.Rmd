@@ -26,6 +26,7 @@ Let's briefly review the questions from midterm 1 so you can get an idea of how 
 library("tidyverse")
 library("janitor")
 library("skimr")
+library("naniar")
 ```
 
 ## Review
@@ -42,17 +43,22 @@ life_history <- read_csv("data/mammal_lifehistories_v3.csv") %>% clean_names()
 
 2. Use one or more of the functions from the last lab to determine if there are NA's in the data, how they are represented, and where they are located.
 ```{r}
-
+life_history %>% 
+  skim()
 ```
 
 ```{r}
-
+life_history %>%
+  map_df(~ sum(is.na(.)))
 ```
 
 
 3. Can we use a single approach to deal with NA's in this data set? Given what you learned in the previous lab, how would you manage the NA values?
 ```{r}
-
+life_history %>% 
+  na_if("-999") %>% 
+  mutate(newborn = na_if(newborn, "not measured")) %>% 
+  map_df(~ sum(is.na(.)))
 ```
 
 ## `naniar`
@@ -60,6 +66,10 @@ life_history <- read_csv("data/mammal_lifehistories_v3.csv") %>% clean_names()
 
 `miss_var_summary` provides a clean summary of NA's across the data frame.
 ```{r}
+life_history <- life_history %>% 
+  na_if("-999") %>% 
+  mutate(newborn = na_if(newborn, "not measured"))
+
 naniar::miss_var_summary(life_history)
 ```
 
@@ -101,17 +111,21 @@ Some key information:
 
 1. Import the data and do a little exploration. Be sure to clean the names if necessary.
 ```{r}
-
+cites <- read_csv("data/cites.csv") %>% clean_names()
 ```
 
 2. Use `naniar` to summarize the NA's in each variable.
 ```{r}
-
+cites %>% miss_var_summary()
 ```
 
 3. Try using `group_by()` with `naniar`. Look specifically at class and `exporter_reported_quantity`. For which taxonomic classes do we have a high proportion of missing export data?
 ```{r}
-
+cites %>% 
+  group_by(class) %>% 
+  select(class, exporter_reported_quantity) %>% 
+  miss_var_summary() %>% 
+  arrange(desc(pct_miss))
 ```
 
 ## Visualizing NAs
