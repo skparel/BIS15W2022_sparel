@@ -132,16 +132,33 @@ For this practice, let's use the [palmerpenguins](https://allisonhorst.github.io
 
 1. Make a bar plot that shows counts of individuals by island. Fill by species, and try both a stacked bar plot and `position="dodge"`.
 ```{r}
+island_counts <- penguins %>% 
+  group_by(island) %>% 
+  count()
 
+island_counts
+```
+
+
+```{r}
+ggplot(data = penguins) +
+  geom_bar(aes(x = island, fill = species)) +
+  theme_minimal()
 ```
 
 ```{r}
-
+ggplot(data = penguins) +
+  geom_bar(aes(x = island, fill = species), position = "dodge") +
+  theme_minimal()
 ```
 
 2. What are the number of individuals separated by sex on each island?
 ```{r}
-
+penguins %>% 
+  group_by(sex) %>% 
+  ggplot() +
+    geom_bar(aes(x = island, fill = sex), position = "dodge") +
+    theme_minimal()
 ```
 
 ## Using `group`

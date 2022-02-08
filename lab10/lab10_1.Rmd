@@ -73,7 +73,7 @@ life_history %>%
 life_history %>% 
   group_by(order) %>% 
   summarize(mean_mass=mean(mass, na.rm=T)) %>% 
-  ggplot(aes(x=order, y=mean_mass))+geom_col()+coord_flip()+scale_y_log10()
+  ggplot(aes(x=reorder(order, mean_mass), y=mean_mass))+geom_col()+coord_flip()+scale_y_log10()
 ```
 
 ## Scatterplots
@@ -109,17 +109,50 @@ elephants <- read_csv(here("lab10", "data", "ElephantsMF.csv")) %>% clean_names(
 
 1. On midterm 1, I asked how many male and female elephants were represented in the data. How would you make a plot of this?
 ```{r}
+sex <- elephants %>% 
+  group_by(sex) %>% 
+  count()
 
+sex
+
+```
+
+```{r}
+ggplot(data = sex) +
+  geom_col(aes(x = sex, y = n)) +
+  theme_minimal()
 ```
 
 2. How does the age of elephants compare by sex?
 ```{r}
+elephants %>% 
+  group_by(sex) %>% 
+  summarize(min = min(age),
+            med = median(age),
+            max = max(age))
+```
 
+
+```{r}
+ggplot(data = elephants) + 
+  geom_boxplot(aes(x = sex, y = age)) +
+  theme_minimal()
 ```
 
 3. What is the relationship between age and height?
 ```{r}
+elephants %>% 
+  group_by(sex) %>% 
+  summarize(min = min(height),
+            med = median(height),
+            max = max(height))
+```
 
+
+```{r}
+ggplot(data = elephants) + 
+  geom_boxplot(aes(x = sex, y = height)) +
+  theme_minimal()
 ```
 
 ## Aesthetics: Labels
@@ -197,12 +230,26 @@ names(homerange)
 
 1. Make a barplot that shows counts of ectotherms and endotherms. Label the axes, provide a title, and fill by `thermoregulation`.
 ```{r}
+thermoreg <- homerange %>% 
+  filter(thermoregulation == "ectotherm" | thermoregulation == "endotherm") %>% 
+  group_by(thermoregulation) %>% 
+  count()
+
+ggplot(data = thermoreg) +
+  geom_col(aes(x = thermoregulation, y = n, fill = thermoregulation)) +
+  labs(x = "Thermoregulation", 
+       y = "Count", 
+       title = "Counts of ectotherms and endotherms") +
+  theme_minimal()
 
 ```
 
 2. Make a scatterplot that compares log10.mass and homerange. Adjust the size of points by mass. Label the axes and provide a title.
 ```{r}
-
+ggplot(data = homerange) +
+  geom_jitter(aes(x = log10.mass, y = log10.hra), alpha = 0.5, color = "red") +
+  labs(x = "Mass", y = "Homerange") +
+  theme_minimal()
 ```
 
 ## That's it! Take a break and I will see you on Zoom!  
