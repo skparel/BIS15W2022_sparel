@@ -330,34 +330,21 @@ ggplot(data = weights) +
 ![](lab10_hw_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 
-6. Add another layer to your answer from #4 using `geom_point` to get an idea of how many measurements were taken for each species.
+6. Add another layer to your answer from #5 using `geom_point` to get an idea of how many measurements were taken for each species.
 
 
 ```r
-plot_types_species <- deserts %>% 
-  group_by(species) %>% 
-  count(plot_type)
-
-plot_types_species
+ggplot(data = weights) +
+  geom_boxplot(aes(x = reorder(species, weight), y = weight)) +
+  geom_point(aes(x =  reorder(species, weight), y = weight), color = "pink") +
+  scale_y_log10() +
+  coord_flip() +
+  labs(x = "Species", 
+       y = "Weight (log10)") +
+  theme_minimal()
 ```
 
-```
-## # A tibble: 156 x 3
-## # Groups:   species [40]
-##    species   plot_type                     n
-##    <chr>     <chr>                     <int>
-##  1 albigula  Control                     610
-##  2 albigula  Long-term Krat Exclosure    166
-##  3 albigula  Rodent Exclosure            147
-##  4 albigula  Short-term Krat Exclosure   252
-##  5 albigula  Spectab exclosure            77
-##  6 audubonii Control                      29
-##  7 audubonii Long-term Krat Exclosure     17
-##  8 audubonii Rodent Exclosure             24
-##  9 audubonii Short-term Krat Exclosure     2
-## 10 audubonii Spectab exclosure             3
-## # ... with 146 more rows
-```
+![](lab10_hw_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 
 7. [Dipodomys merriami](https://en.wikipedia.org/wiki/Merriam's_kangaroo_rat) is the most frequently sampled animal in the study. How have the number of observations of this species changed over the years included in the study?

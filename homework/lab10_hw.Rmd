@@ -154,14 +154,17 @@ ggplot(data = weights) +
 ```
 
 
-6. Add another layer to your answer from #4 using `geom_point` to get an idea of how many measurements were taken for each species.
+6. Add another layer to your answer from #5 using `geom_point` to get an idea of how many measurements were taken for each species.
 
 ```{r}
-plot_types_species <- deserts %>% 
-  group_by(species) %>% 
-  count(plot_type)
-
-plot_types_species
+ggplot(data = weights) +
+  geom_boxplot(aes(x = reorder(species, weight), y = weight)) +
+  geom_point(aes(x =  reorder(species, weight), y = weight), color = "pink") +
+  scale_y_log10() +
+  coord_flip() +
+  labs(x = "Species", 
+       y = "Weight (log10)") +
+  theme_minimal()
 ```
 
 
