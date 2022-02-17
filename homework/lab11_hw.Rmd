@@ -330,6 +330,7 @@ gapminder %>%
   filter(country %in% top_life_exp | country %in% bottom_life_exp) %>% 
   ggplot() +
     geom_line(aes(x = year , y = lifeExp, color = country)) +
+    facet_wrap(~country) + 
     labs(x = "Year",
          y = "Average Life Expectancy at Birth",
          title = "Countries with the Highest and Lowest Life Expectancy",

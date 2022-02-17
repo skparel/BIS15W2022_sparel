@@ -164,12 +164,16 @@ homerange %>%
 ## Practice
 1. Revisit the relationship between mass and homerange using a scatterplot, but color the points by taxonomic class using a custom color theme.
 ```{r}
-
+ggplot(data = homerange) +
+  geom_point(aes(x = log10.mass, y = log10.hra, color = class)) +
+  scale_color_viridis_d(option = "plasma") 
 ```
 
 2. Build bar plots that show the representation by taxonomic class with carnivores and herbivores. Try using a color theme that matches your scatterplot to keep everything consistent.
 ```{r}
-
+ggplot(data = homerange) +
+  geom_bar(aes(x = trophic.guild, fill = class), position = "dodge") +
+  scale_fill_viridis_d(option = "plasma")
 ```
 
 ## Faceting
@@ -248,14 +252,20 @@ ecosphere %>%
 ```
 
 ## Practice
-1. Build a faceted plot that shows a distribution of life expectancy by habitat type.
+1. Build a faceted plot that shows a distribution of mean_eggs_per_clutch by habitat type.
 ```{r}
-
+ecosphere %>% 
+  ggplot(aes(x = mean_eggs_per_clutch))+ 
+  geom_density(alpha=0.4)+ 
+  facet_grid(.~habitat)
 ```
 
 2. Try the same plot as #1 above, but include life_expectancy~habitat.
 ```{r}
-
+ecosphere %>% 
+  ggplot(aes(x = mean_eggs_per_clutch))+ 
+  geom_density(alpha=0.4)+ 
+  facet_wrap(.~habitat)
 ```
 
 ## That's it, let's take a break!   
