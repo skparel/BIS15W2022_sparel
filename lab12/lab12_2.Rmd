@@ -91,6 +91,13 @@ ggmap(map1) +
 
 ## Practice
 1. Map the spider locations with a different type of base map. Try to adjust the map using different aesthetics including `size`, `color`, and `alpha`.
+```{r}
+map2 <- get_map(bbox, maptype = "watercolor", source = "stamen")
+ggmap(map2) + 
+  geom_point(data = spiders, aes(longitude, latitude), color = "magenta", alpha = 0.4) +
+  labs(x = "Longitude", y = "Latitude", title = "Spider Locations")
+```
+
 
 ## Albers USA
 The Albers USA [package](https://github.com/hrbrmstr/albersusa) is a very fast way to produce clean maps that include nice overlays of counties across the US.
@@ -160,9 +167,30 @@ uso_map
 
 ## Practice
 1. Make a new column that labels each specimen as occurring in a cave or on the surface. The word "Cave" is part of the locality information.
+```{r}
+caves <- spiders %>% slice(which(str_detect(locality, "Cave")))
+
+`%notin%` <- Negate(`%in%`)
+spiders <- spiders %>% 
+  mutate(cave = case_when(accession %in% caves$accession ~ "Cave",
+                          accession %notin% caves$accession ~ "Surface"))
+```
 
 
 2. Now adjust the plot above to give a different color for specimens that occur in caves.
+```{r}
+ggplot() +
+  geom_sf(data = ca_comp, size = 0.125)+
+  geom_sf(data = ca_cnty_comp, size = 0.125)+
+  geom_point(data = spiders, aes(longitude, latitude, color = cave), alpha = 0.4)+
+  labs(x = "Figure 1: Distribution of Usofila spiders",
+       color = "Location")+
+  theme_minimal() +
+  theme(axis.text = element_blank()) +
+  theme(axis.title.x = element_text(hjust=0.5, size = 10)) +
+  theme(axis.title.y = element_blank()) +
+  theme(panel.grid = element_blank()) 
+```
 
 
 ## That's it, let's take a break!   
