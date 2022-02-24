@@ -58,11 +58,11 @@ Below is a bare bones shiny app. You can get this code snippet by typing `shinya
 library(shiny)
 
 ui <- fluidPage(
-  
+  # front end interface
 )
 
 server <- function(input, output, session) {
-  
+  # back end logic
 }
 
 shinyApp(ui, server)
@@ -77,6 +77,11 @@ Let's get the names of the `palmerpenguins` data frame and add them as a `select
 ```{r}
 names(penguins)
 ```
+```{r}
+ggplot(data = penguins) + 
+  geom_point(aes(x = flipper_length_mm, y = body_mass_g))
+```
+
 
 We won't use the name `species` because that will be the `ggplot` grouping variable. Copy and paste the code below and run the app to see our new input. 
 ```{r, eval=F, echo=T}
