@@ -107,7 +107,10 @@ homerange%>%
 
 what is the flying non-bird?
 ```{r}
-
+homerange%>%
+  filter(taxon != "birds")%>%
+  filter(locomotion == "flying")%>%
+  select(common.name)
 ```
 
 
@@ -194,9 +197,17 @@ ecto_vec<- homerange %>%
 ```{r}
 
 # Make the list of vectors:
-
+vector_list <- list(swimming_vec, carni_vec, aqua_vec, ecto_vec)
 
 # Make the plot:
+ggVennDiagram(vector_list, 
+              category.names = c("Swimming", "Carnivores", "Aquatic", "Ectotherms"),
+              label = "count",
+              label_geom = "label",
+              label_alpha = 1,
+              label_color = "black") +
+  scale_fill_viridis_c(option = "plasma")
+              
 ```
 
 
@@ -207,7 +218,11 @@ Use dplyr to determine which 20 animals from this plot are:
 - NOT Carnivores?
 
 ```{r}
-
+homerange %>% 
+  filter(trophic.guild != "carnivore",
+         locomotion == "swimming",
+         realm == "aquatic",
+         thermoregulation == "ectotherm")
 ```
 
 
@@ -248,11 +263,18 @@ If they dont fit, try tinkering the `scale_size_area(max_size =   )`
 
 make the count table:
 ```{r}
-
+reptilia_family_count <- homerange %>% 
+  filter(class == "reptilia") %>% 
+  count(family)
+reptilia_family_count
 ```
 
 
 make the plot:
 ```{r}
-
+reptilia_family_count %>% 
+ggplot(aes(label = family, size = n, color = family)) +
+  geom_text_wordcloud() +
+  scale_size_area(max_size = 20) +
+  theme_minimal()
 ```
